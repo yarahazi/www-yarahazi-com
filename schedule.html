@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>スケジュール | やらはじ</title>
 
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111;
+      --sub: #666;
+      --line: rgba(0,0,0,0.1);
+      --accent: #cd74e6;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --text: #f5f5f5;
+      --sub: #aaa;
+      --line: rgba(255,255,255,0.15);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ===== 共通ヘッダー（既存CSSがあるなら削除OK） ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 64px;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--line);
+      z-index: 900;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ===== メイン ===== */
+    main {
+      max-width: 1000px;
+      margin: 100px auto 80px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3em;
+    }
+
+    .note {
+      color: var(--sub);
+      font-size: 0.9rem;
+      margin-bottom: 1.5em;
+    }
+
+    /* 固定スケジュール */
+    .fixed-schedule {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+    }
+
+    .fixed-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .fixed-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .fixed-text {
+      font-size: 0.95rem;
+    }
+
+    /* カレンダー */
+    .calendar-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 75%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .calendar-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 640px) {
+      .calendar-wrap {
+        padding-top: 120%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 共通ヘッダー -->
+  <header>
+    <div class="header-inner">
+      <strong>やらはじ</strong>
+      <!-- ナビやテーマ切替ボタンをここに -->
+    </div>
+  </header>
+
+  <main>
+    <h1>スケジュール</h1>
+    <p class="note">
+      配信・投稿予定は下記の時間帯を基本に、カレンダーで更新しています
+    </p>
+
+    <!-- 固定スケジュール表示 -->
+    <section class="fixed-schedule">
+      <div class="fixed-item">
+        <span class="badge">LIVE</span>
+        <span class="fixed-text">ライブ配信：不定期 16:45〜</span>
+      </div>
+      <div class="fixed-item">
+        <span class="badge">Shorts</span>
+        <span class="fixed-text">毎週金曜日 18:45〜</span>
+      </div>
+    </section>
+
+    <!-- Googleカレンダー -->
+    <div class="calendar-wrap">
+      <iframe
+        src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a815d3fbf@group.calendar.google.com"
+        scrolling="no">
+      </iframe>
+    </div>
+  </main>
+</body>
+</html>
