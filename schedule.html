@@ -3,22 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>スケジュール | やらはじ</title>
+  <title>Schedule | やらはじ</title>
+
+  <!-- 共通JS -->
+  <script src="/main/js/header.js" defer></script>
+  <script src="/main/js/theme.js" defer></script>
 
   <style>
     :root {
       --bg: #ffffff;
       --text: #111;
       --sub: #666;
-      --line: rgba(0,0,0,0.1);
+      --border: rgba(0,0,0,0.1);
       --accent: #cd74e6;
-    }
-
-    [data-theme="dark"] {
-      --bg: #0f0f0f;
-      --text: #f5f5f5;
-      --sub: #aaa;
-      --line: rgba(255,255,255,0.15);
     }
 
     body {
@@ -26,97 +23,71 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
+      line-height: 1.7;
     }
 
     main {
       max-width: 1000px;
-      margin: 100px auto 80px; /* ← header 分の余白 */
-      padding: 0 20px;
+      margin: 0 auto;
+      padding: 96px 24px 32px;
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 0.3em;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
     }
 
-    .note {
-      color: var(--sub);
-      font-size: 0.9rem;
-      margin-bottom: 1.5em;
-    }
-
-    .fixed-schedule {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 16px 18px;
+    .schedule-info {
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      border-radius: 12px;
+      padding: 16px 20px;
       margin-bottom: 24px;
+      font-size: 0.95rem;
     }
 
-    .fixed-item {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .fixed-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #fff;
-      white-space: nowrap;
+    .schedule-info strong {
+      color: var(--accent);
     }
 
     .calendar-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 75%;
-      border: 1px solid var(--line);
-      border-radius: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
       overflow: hidden;
     }
 
     .calendar-wrap iframe {
-      position: absolute;
-      inset: 0;
       width: 100%;
-      height: 100%;
+      height: 700px;
       border: 0;
     }
 
-    @media (max-width: 640px) {
-      .calendar-wrap {
-        padding-top: 120%;
-      }
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+      color: var(--sub);
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
     }
   </style>
 </head>
 
 <body>
-  <!-- 共通ヘッダー -->
-  <div id="header"></div>
+  <!-- header.js がヘッダーを挿入 -->
 
   <main>
-    <h1>スケジュール</h1>
-    <p class="note">
-      配信・投稿予定は下記の時間帯を基本に、カレンダーで更新しています
-    </p>
+    <h1>Schedule</h1>
 
-    <section class="fixed-schedule">
-      <div class="fixed-item">
-        <span class="badge">LIVE</span>
-        <span>ライブ配信：不定期 16:45〜</span>
-      </div>
-      <div class="fixed-item">
-        <span class="badge">Shorts</span>
-        <span>毎週金曜日 18:45〜</span>
-      </div>
-    </section>
+    <div class="schedule-info">
+      <p>
+        <strong>Live配信：</strong> 不定期（目安 <strong>16:45〜</strong>）<br>
+        <strong>Shorts：</strong> 毎週金曜日 <strong>18:45〜</strong>
+      </p>
+      <p style="margin: 0;">
+        ※ 正確な日時は下のカレンダーをご確認ください。
+      </p>
+    </div>
 
     <div class="calendar-wrap">
       <iframe
@@ -126,8 +97,8 @@
     </div>
   </main>
 
-  <!-- JS（必ず body の一番下） -->
-  <script src="./js/header.js"></script>
-  <script src="./js/theme.js"></script>
+  <footer>
+    © 2026 yarahazi
+  </footer>
 </body>
 </html>
