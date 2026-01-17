@@ -30,7 +30,7 @@
 
     main {
       max-width: 1000px;
-      margin: 80px auto;
+      margin: 100px auto 80px; /* ← header 分の余白 */
       padding: 0 20px;
     }
 
@@ -45,7 +45,6 @@
       margin-bottom: 1.5em;
     }
 
-    /* 固定スケジュール */
     .fixed-schedule {
       border: 1px solid var(--line);
       border-radius: 14px;
@@ -73,7 +72,6 @@
       white-space: nowrap;
     }
 
-    /* Google カレンダー */
     .calendar-wrap {
       position: relative;
       width: 100%;
@@ -100,13 +98,15 @@
 </head>
 
 <body>
+  <!-- 共通ヘッダー -->
+  <div id="header"></div>
+
   <main>
     <h1>スケジュール</h1>
     <p class="note">
       配信・投稿予定は下記の時間帯を基本に、カレンダーで更新しています
     </p>
 
-    <!-- 固定スケジュール表示 -->
     <section class="fixed-schedule">
       <div class="fixed-item">
         <span class="badge">LIVE</span>
@@ -118,7 +118,6 @@
       </div>
     </section>
 
-    <!-- Google カレンダー -->
     <div class="calendar-wrap">
       <iframe
         src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a815d3fbf@group.calendar.google.com"
@@ -127,15 +126,8 @@
     </div>
   </main>
 
-  <!-- 既存 footer.html 読み込み -->
-  <div id="footer"></div>
-
-  <script>
-    fetch("footer.html")
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById("footer").innerHTML = html;
-      });
-  </script>
+  <!-- JS（必ず body の一番下） -->
+  <script src="./js/header.js"></script>
+  <script src="./js/theme.js"></script>
 </body>
 </html>
