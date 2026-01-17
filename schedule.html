@@ -73,7 +73,7 @@
       white-space: nowrap;
     }
 
-    /* カレンダー */
+    /* Google カレンダー */
     .calendar-wrap {
       position: relative;
       width: 100%;
@@ -96,45 +96,6 @@
         padding-top: 120%;
       }
     }
-
-    /* ===== フッター共通CSS ===== */
-    .site-footer {
-      border-top: 1px solid var(--line);
-      margin-top: 80px;
-      padding: 32px 20px;
-      color: var(--sub);
-    }
-
-    .footer-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .footer-name {
-      color: var(--text);
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .footer-nav {
-      margin-bottom: 10px;
-    }
-
-    .footer-nav a {
-      color: var(--sub);
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 0.9rem;
-    }
-
-    .footer-nav a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-copy {
-      font-size: 0.75rem;
-    }
   </style>
 </head>
 
@@ -142,10 +103,10 @@
   <main>
     <h1>スケジュール</h1>
     <p class="note">
-      配信・投稿予定は下記の時間帯を基本に更新しています
+      配信・投稿予定は下記の時間帯を基本に、カレンダーで更新しています
     </p>
 
-    <!-- 固定スケジュール -->
+    <!-- 固定スケジュール表示 -->
     <section class="fixed-schedule">
       <div class="fixed-item">
         <span class="badge">LIVE</span>
@@ -157,7 +118,7 @@
       </div>
     </section>
 
-    <!-- Googleカレンダー -->
+    <!-- Google カレンダー -->
     <div class="calendar-wrap">
       <iframe
         src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a815d3fbf@group.calendar.google.com"
@@ -166,8 +127,15 @@
     </div>
   </main>
 
-  <!-- 共通フッター -->
-  <!-- GitHub Pagesでは直接 include できないのでコピペ or JS読み込み -->
-  <!-- footer.html をここに読み込む -->
+  <!-- 既存 footer.html 読み込み -->
+  <div id="footer"></div>
+
+  <script>
+    fetch("footer.html")
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("footer").innerHTML = html;
+      });
+  </script>
 </body>
 </html>
