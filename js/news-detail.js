@@ -1,4 +1,4 @@
-const API_KEY = "ここにAPIキー";
+const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
 
