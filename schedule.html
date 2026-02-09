@@ -1,178 +1,81 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="dark">
+<html lang="ja" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>配信スケジュール</title>
+  <title>Schedule | やらはじ公式サイト</title>
 
-  <style>
-    /* ==========
-       Theme
-    ========== */
-    :root {
-      --bg: #ffffff;
-      --text: #111;
-      --sub: #555;
-      --border: rgba(0,0,0,0.1);
-      --accent: #cd74e6;
-    }
-
-    html[data-theme="dark"] {
-      --bg: #0f0f0f;
-      --text: #f5f5f5;
-      --sub: #b5b5b5;
-      --border: rgba(255,255,255,0.1);
-    }
-
-    /* ==========
-       Base
-    ========== */
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-                   "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ==========
-       Header
-    ========== */
-    .site-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 64px;
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      height: 100%;
-      margin: 0 auto;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .site-title {
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .theme-toggle.rotate {
-      transform: rotate(180deg);
-    }
-
-    /* ==========
-       Main
-    ========== */
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 96px 16px 48px; /* ヘッダー分余白 */
-    }
-
-    h1 {
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-    }
-
-    .note {
-      color: var(--sub);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    .note span {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* ==========
-       Calendar
-    ========== */
-    .calendar-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 75%;
-    }
-
-    .calendar-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    @media (max-width: 600px) {
-      .calendar-wrap {
-        padding-top: 120%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="site-title">YARAHASI</div>
-      <button id="themeToggle" class="theme-toggle" aria-label="テーマ切替">
-        ◐
-      </button>
-    </div>
-  </header>
 
-  <!-- Main -->
-  <main>
-    <h1>配信スケジュール</h1>
+<!-- =========================
+     Header
+========================= -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <div class="site-logo">やらはじ</div>
 
-    <div class="note">
-      <p>
-        <span>Live配信：</span>不定期（目安 16:45〜）<br />
-        <span>Shorts：</span>毎週金曜日 18:45〜
-      </p>
-    </div>
+    <nav class="site-nav" id="site-nav">
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="schedule.html" aria-current="page">Schedule</a>
+      <a href="profile.html">Profile</a>
+      <a href="guideline.html">Guideline</a>
+      <a href="contact.html">Contact</a>
+    </nav>
 
-    <div class="calendar-wrap">
-      <iframe
-        src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a"
-        scrolling="no">
-      </iframe>
-    </div>
-  </main>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+      ≡
+    </button>
+  </div>
+</header>
 
-  <!-- Script -->
-  <script>
-    const toggle = document.getElementById("themeToggle");
-    const html = document.documentElement;
+<!-- =========================
+     Main
+========================= -->
+<main class="container">
+  <h1 class="page-title">配信スケジュール</h1>
 
-    toggle.addEventListener("click", () => {
-      const isDark = html.getAttribute("data-theme") === "dark";
-      html.setAttribute("data-theme", isDark ? "light" : "dark");
-      toggle.classList.toggle("rotate");
-    });
-  </script>
+  <div class="schedule-note">
+    <p>
+      <strong>Live配信：</strong>不定期（目安 16:45〜）<br>
+      <strong>Shorts：</strong>毎週金曜日 18:45〜
+    </p>
+  </div>
+
+  <div class="calendar-wrap">
+    <iframe
+      src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a815d3fbf@group.calendar.google.com"
+      style="border:0"
+      width="100%"
+      height="600"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+</main>
+
+<!-- =========================
+     Theme Toggle
+========================= -->
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <span class="theme-icon" id="theme-icon">◐</span>
+</button>
+
+<!-- =========================
+     Footer
+========================= -->
+<div id="footer"></div>
+
+<!-- =========================
+     Scripts
+========================= -->
+<script src="js/header.js"></script>
+<script src="js/theme.js"></script>
+<script src="/common.js"></script>
+
 </body>
 </html>
