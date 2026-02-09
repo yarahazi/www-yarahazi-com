@@ -9,17 +9,11 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/header.css">
 
-  <!-- =========================
-       News 専用デザイン
-  ========================= -->
   <style>
     .container.news-page {
-      display: block;
-      height: auto;
       max-width: 1000px;
       margin: 100px auto 80px;
       padding: 0 20px;
-      box-sizing: border-box;
     }
 
     .news-item {
@@ -28,9 +22,6 @@
     }
 
     .news-meta {
-      display: flex;
-      gap: 12px;
-      align-items: center;
       font-size: 0.8rem;
       color: var(--sub, #888);
       margin-bottom: 6px;
@@ -41,23 +32,28 @@
       margin-bottom: 6px;
     }
 
+    .news-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .news-title a:hover {
+      text-decoration: underline;
+    }
+
     .news-excerpt {
       font-size: 0.95rem;
-      line-height: 1.7;
       color: var(--sub, #777);
+      line-height: 1.7;
     }
   </style>
 </head>
 
 <body>
 
-<!-- =========================
-     Header（共通）
-========================= -->
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <div class="site-logo">やらはじ</div>
-
     <nav class="site-nav" id="site-nav">
       <a href="/about.html">About</a>
       <a href="/news.html" aria-current="page">News</a>
@@ -66,36 +62,17 @@
       <a href="/guideline.html">Guideline</a>
       <a href="/contact.html">Contact</a>
     </nav>
-
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
-      ≡
-    </button>
+    <button class="menu-toggle" id="menu-toggle">≡</button>
   </div>
 </header>
 
-<!-- =========================
-     Main
-========================= -->
 <main class="container news-page">
   <h1>News</h1>
   <div id="newsList">読み込み中…</div>
 </main>
 
-<!-- =========================
-     Theme Toggle
-========================= -->
-<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-  <span class="theme-icon" id="theme-icon">◐</span>
-</button>
-
-<!-- =========================
-     Footer
-========================= -->
 <div id="footer"></div>
 
-<!-- =========================
-     Scripts
-========================= -->
 <script src="/js/header.js"></script>
 <script src="/js/theme.js"></script>
 <script src="/common.js"></script>
@@ -118,28 +95,31 @@
       data.contents.forEach(item => {
         const date = new Date(item.publishedAt).toLocaleDateString("ja-JP");
 
-        // カテゴリ（セレクト or 参照 両対応）
-        const category =
-          typeof item.category === "string"
-            ? item.category
-            : item.category?.name ?? "";
+        // カテゴリー（参照対応）
+        const category = item.category?.name ?? "";
 
-        // 本文からテキストだけ抜き出して80文字
-        const plainText =
-          item.body?.html
-            ?.replace(/<[^>]+>/g, "")
-            .slice(0, 80) ?? "";
+        // リッチエディタ → テキスト抽出
+        const bodyText = item.body
+          ? item.body.replace(/<[^>]+>/g, "").slice(0, 80)
+          : "";
 
         const article = document.createElement("article");
         article.className = "news-item";
 
         article.innerHTML = `
           <div class="news-meta">
-            <span>${date}</span>
-            ${category ? `<span>・${category}</span>` : ""}
+            ${date}${category ? " ・ " + category : ""}
           </div>
-          <h2 class="news-title">${item.title}</h2>
-          <p class="news-excerpt">${plainText}${plainText.length === 80 ? "…" : ""}</p>
+
+          <h2 class="news-title">
+            <a href="news-detail.html?id=${item.id}">
+              ${item.title}
+            </a>
+          </h2>
+
+          <p class="news-excerpt">
+            ${bodyText}${bodyText.length === 80 ? "…" : ""}
+          </p>
         `;
 
         list.appendChild(article);
