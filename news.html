@@ -5,46 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>News | やらはじ公式サイト</title>
 
-  <!-- 共通CSS -->
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
 
   <style>
     .container.news-page {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 100px auto 80px;
       padding: 0 20px;
     }
 
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .news-item {
-      padding: 26px 0;
-      border-bottom: 1px solid var(--line, rgba(0,0,0,0.1));
+      padding: 18px 20px;
+      border: 1px solid var(--line, rgba(0,0,0,0.1));
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .news-item:hover {
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
     }
 
     .news-meta {
+      display: flex;
+      gap: 10px;
       font-size: 0.8rem;
-      color: var(--sub, #888);
       margin-bottom: 6px;
+      color: var(--sub, #777);
     }
 
     .news-title {
-      font-size: 1.3rem;
+      font-size: 1.05rem;
       margin-bottom: 6px;
     }
 
-    .news-title a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .news-title a:hover {
-      text-decoration: underline;
-    }
-
     .news-excerpt {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--sub, #777);
-      line-height: 1.7;
     }
   </style>
 </head>
@@ -55,12 +59,12 @@
   <div class="header-inner">
     <div class="site-logo">やらはじ</div>
     <nav class="site-nav" id="site-nav">
-      <a href="/about.html">About</a>
-      <a href="/news.html" aria-current="page">News</a>
-      <a href="/schedule.html">Schedule</a>
-      <a href="/profile.html">Profile</a>
-      <a href="/guideline.html">Guideline</a>
-      <a href="/contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="news.html" aria-current="page">News</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="profile.html">Profile</a>
+      <a href="guideline.html">Guideline</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <button class="menu-toggle" id="menu-toggle">≡</button>
   </div>
@@ -68,68 +72,19 @@
 
 <main class="container news-page">
   <h1>News</h1>
-  <div id="newsList">読み込み中…</div>
+  <div class="news-list" id="news-list"></div>
 </main>
+
+<button class="theme-toggle" id="theme-toggle">
+  <span class="theme-icon" id="theme-icon">◐</span>
+</button>
 
 <div id="footer"></div>
 
-<script src="/js/header.js"></script>
-<script src="/js/theme.js"></script>
+<script src="js/header.js"></script>
+<script src="js/theme.js"></script>
 <script src="/common.js"></script>
-
-<script>
-  const SERVICE_ID = "yarahazi";
-  const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
-  const ENDPOINT = "news";
-
-  fetch(`https://${SERVICE_ID}.microcms.io/api/v1/${ENDPOINT}`, {
-    headers: {
-      "X-MICROCMS-API-KEY": API_KEY
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      const list = document.getElementById("newsList");
-      list.innerHTML = "";
-
-      data.contents.forEach(item => {
-        const date = new Date(item.publishedAt).toLocaleDateString("ja-JP");
-
-        // カテゴリー（参照対応）
-        const category = item.category?.name ?? "";
-
-        // リッチエディタ → テキスト抽出
-        const bodyText = item.body
-          ? item.body.replace(/<[^>]+>/g, "").slice(0, 80)
-          : "";
-
-        const article = document.createElement("article");
-        article.className = "news-item";
-
-        article.innerHTML = `
-          <div class="news-meta">
-            ${date}${category ? " ・ " + category : ""}
-          </div>
-
-          <h2 class="news-title">
-            <a href="news-detail.html?id=${item.id}">
-              ${item.title}
-            </a>
-          </h2>
-
-          <p class="news-excerpt">
-            ${bodyText}${bodyText.length === 80 ? "…" : ""}
-          </p>
-        `;
-
-        list.appendChild(article);
-      });
-    })
-    .catch(() => {
-      document.getElementById("newsList").textContent =
-        "Newsの取得に失敗しました";
-    });
-</script>
+<script src="js/news.js"></script>
 
 </body>
 </html>
