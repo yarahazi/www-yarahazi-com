@@ -5,226 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>News | やらはじ</title>
 
+  <!-- 共通CSS（schedule.htmlと同じもの） -->
+  <link rel="stylesheet" href="common.css" />
+
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111;
-      --sub: #666;
-      --border: rgba(0,0,0,0.08);
-      --card: #f7f7f7;
-      --accent: #cd74e6;
-    }
-
-    html[data-theme="dark"] {
-      --bg: #0f0f0f;
-      --text: #f5f5f5;
-      --sub: #aaa;
-      --border: rgba(255,255,255,0.1);
-      --card: #1a1a1a;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    /* ===== header ===== */
-    .site-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 64px;
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      height: 100%;
+    /* newsページ固有だけここに書く */
+    .news-wrapper {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 32px 16px;
     }
 
-    .site-title {
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--text);
+    .news-item {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
-    nav a {
-      margin-left: 16px;
-      text-decoration: none;
-      color: var(--sub);
-      font-size: 14px;
+    [data-theme="dark"] .news-item {
+      border-color: rgba(255,255,255,0.15);
     }
 
-    nav a:hover {
-      color: var(--text);
+    .news-date {
+      font-size: 0.85rem;
+      opacity: 0.7;
     }
 
-    .theme-toggle {
-      margin-left: 16px;
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: var(--text);
-      font-size: 16px;
-    }
-
-    /* ===== main ===== */
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 120px 16px 80px;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 32px;
-    }
-
-    .news-list {
-      display: grid;
-      gap: 24px;
-    }
-
-    article {
-      background: var(--card);
-      border-radius: 12px;
-      padding: 20px;
-    }
-
-    .news-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: var(--sub);
-      margin-bottom: 8px;
-    }
-
-    .category {
-      padding: 2px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      background: var(--accent);
-      color: #fff;
-    }
-
-    h2 {
-      font-size: 18px;
-      margin: 8px 0 12px;
+    .news-title {
+      font-size: 1.2rem;
+      margin: 6px 0 8px;
     }
 
     .news-body {
-      font-size: 14px;
       line-height: 1.7;
-    }
-
-    .news-body a {
-      color: var(--accent);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: var(--sub);
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
+      white-space: pre-wrap;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- ===== 共通ヘッダー（schedule.htmlと同じ） ===== -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="site-title">やらはじ</a>
-      <nav>
+      <a href="index.html" class="site-logo">やらはじ</a>
+      <nav class="site-nav">
         <a href="news.html">News</a>
         <a href="schedule.html">Schedule</a>
-        <button class="theme-toggle" id="themeToggle">◐</button>
       </nav>
+      <button id="themeToggle" aria-label="テーマ切り替え">◐</button>
     </div>
   </header>
 
-  <main>
+  <!-- ===== メイン ===== -->
+  <main class="news-wrapper">
     <h1>News</h1>
-    <section class="news-list" id="newsList">
-      <p>読み込み中…</p>
-    </section>
+    <div id="newsList">読み込み中…</div>
   </main>
 
-  <footer>
-    © やらはじ
+  <!-- ===== 共通フッター ===== -->
+  <footer class="site-footer">
+    <small>© やらはじ</small>
   </footer>
 
+  <!-- ===== 共通JS（schedule.htmlと同じ） ===== -->
+  <script src="common.js"></script>
+
+  <!-- ===== news取得JS ===== -->
   <script>
-    /* ===== theme toggle ===== */
-    const toggle = document.getElementById("themeToggle");
-    const html = document.documentElement;
-
-    toggle.addEventListener("click", () => {
-      const current = html.getAttribute("data-theme");
-      html.setAttribute(
-        "data-theme",
-        current === "dark" ? "light" : "dark"
-      );
-    });
-
-    /* ===== microCMS ===== */
     const SERVICE_ID = "yarahazi";
-    const API_KEY = "ここにAPIキーを貼る"; // ← 実キーに置き換え
+    const API_KEY = "ここにAPIキー";
+    const ENDPOINT = "news";
 
-    fetch(`https://${SERVICE_ID}.microcms.io/api/v1/news?orders=-date`, {
+    fetch(`https://${SERVICE_ID}.microcms.io/api/v1/${ENDPOINT}`, {
       headers: {
         "X-MICROCMS-API-KEY": API_KEY
       }
     })
-      .then(res => {
-        if (!res.ok) throw new Error("API Error");
-        return res.json();
-      })
+      .then(res => res.json())
       .then(data => {
         const list = document.getElementById("newsList");
         list.innerHTML = "";
 
-        if (data.contents.length === 0) {
-          list.innerHTML = "<p>記事がありません。</p>";
-          return;
-        }
-
         data.contents.forEach(item => {
           const article = document.createElement("article");
+          article.className = "news-item";
 
           article.innerHTML = `
-            <div class="news-meta">
-              <time>${item.date}</time>
-              <span class="category">${item.category}</span>
-            </div>
-            <h2>${item.title}</h2>
+            <div class="news-date">${item.publishedAt?.slice(0,10)}</div>
+            <h2 class="news-title">${item.title}</h2>
             <div class="news-body">${item.body}</div>
-            ${item.link ? `<p><a href="${item.link}" target="_blank" rel="noopener">関連リンク</a></p>` : ""}
           `;
 
           list.appendChild(article);
         });
       })
       .catch(err => {
+        document.getElementById("newsList").textContent = "Newsの取得に失敗しました";
         console.error(err);
-        document.getElementById("newsList").innerHTML =
-          "<p>記事の取得に失敗しました。</p>";
       });
   </script>
+
 </body>
 </html>
