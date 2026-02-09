@@ -1,4 +1,4 @@
-const API_KEY = "ここにAPIキー";
+const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
 const ENDPOINT = "https://yarahazi.microcms.io/api/v1/news";
 
 fetch(ENDPOINT, {
