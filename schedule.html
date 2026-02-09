@@ -5,14 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Schedule | やらはじ公式サイト</title>
 
+  <!-- 共通CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
+
+  <!-- =========================
+       Schedule専用 上書きCSS
+       （index用レイアウトを無効化）
+  ========================= -->
+  <style>
+    .container.schedule-page {
+      display: block;      /* flex解除 */
+      height: auto;        /* 100vh解除 */
+      padding-top: 120px;  /* 固定ヘッダー回避 */
+      padding-bottom: 80px;
+      box-sizing: border-box;
+    }
+
+    .schedule-page h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .schedule-note {
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .calendar-wrap {
+      width: 100%;
+      height: 650px;
+    }
+
+    .calendar-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 600px) {
+      .calendar-wrap {
+        height: 520px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <!-- =========================
-     Header
+     Header（index.htmlと完全一致）
 ========================= -->
 <header class="site-header" id="site-header">
   <div class="header-inner">
@@ -36,42 +78,36 @@
 <!-- =========================
      Main
 ========================= -->
-<main class="container">
-  <h1 class="page-title">配信スケジュール</h1>
+<main class="container schedule-page">
+  <h1>配信スケジュール</h1>
 
-  <div class="schedule-note">
-    <p>
-      <strong>Live配信：</strong>不定期（目安 16:45〜）<br>
-      <strong>Shorts：</strong>毎週金曜日 18:45〜
-    </p>
-  </div>
+  <p class="schedule-note">
+    <strong>Live配信：</strong>不定期（目安 16:45〜）<br>
+    <strong>Shorts：</strong>毎週金曜日 18:45〜
+  </p>
 
   <div class="calendar-wrap">
     <iframe
       src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a815d3fbf@group.calendar.google.com"
-      style="border:0"
-      width="100%"
-      height="600"
-      frameborder="0"
       scrolling="no">
     </iframe>
   </div>
 </main>
 
 <!-- =========================
-     Theme Toggle
+     Theme Toggle（共通）
 ========================= -->
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
 <!-- =========================
-     Footer
+     Footer（common.js読み込み）
 ========================= -->
 <div id="footer"></div>
 
 <!-- =========================
-     Scripts
+     Scripts（index.htmlと同一）
 ========================= -->
 <script src="js/header.js"></script>
 <script src="js/theme.js"></script>
