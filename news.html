@@ -3,26 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News | やらはじ</title>
+  <title>News | やらはじ公式サイト</title>
 
-  <!-- 共通CSS（schedule.htmlと同じもの） -->
-  <link rel="stylesheet" href="common.css" />
+  <!-- 共通CSS（※ 絶対パスで統一） -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/header.css">
 
+  <!-- =========================
+       News 専用デザイン
+  ========================= -->
   <style>
-    /* newsページ固有だけここに書く */
-    .news-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 32px 16px;
+    .container.news-page {
+      display: block;
+      height: auto;
+      max-width: 1000px;
+      margin: 100px auto 80px;
+      padding: 0 20px;
+      box-sizing: border-box;
     }
 
     .news-item {
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    [data-theme="dark"] .news-item {
-      border-color: rgba(255,255,255,0.15);
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line, rgba(0,0,0,0.1));
     }
 
     .news-date {
@@ -31,79 +33,102 @@
     }
 
     .news-title {
-      font-size: 1.2rem;
-      margin: 6px 0 8px;
+      font-size: 1.3rem;
+      margin: 6px 0 10px;
     }
 
     .news-body {
-      line-height: 1.7;
-      white-space: pre-wrap;
+      line-height: 1.8;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ===== 共通ヘッダー（schedule.htmlと同じ） ===== -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="site-logo">やらはじ</a>
-      <nav class="site-nav">
-        <a href="news.html">News</a>
-        <a href="schedule.html">Schedule</a>
-      </nav>
-      <button id="themeToggle" aria-label="テーマ切り替え">◐</button>
-    </div>
-  </header>
+<!-- =========================
+     Header（共通）
+========================= -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <div class="site-logo">やらはじ</div>
 
-  <!-- ===== メイン ===== -->
-  <main class="news-wrapper">
-    <h1>News</h1>
-    <div id="newsList">読み込み中…</div>
-  </main>
+    <nav class="site-nav" id="site-nav">
+      <a href="/about.html">About</a>
+      <a href="/news.html" aria-current="page">News</a>
+      <a href="/schedule.html">Schedule</a>
+      <a href="/profile.html">Profile</a>
+      <a href="/guideline.html">Guideline</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
 
-  <!-- ===== 共通フッター ===== -->
-  <footer class="site-footer">
-    <small>© やらはじ</small>
-  </footer>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+      ≡
+    </button>
+  </div>
+</header>
 
-  <!-- ===== 共通JS（schedule.htmlと同じ） ===== -->
-  <script src="common.js"></script>
+<!-- =========================
+     Main
+========================= -->
+<main class="container news-page">
+  <h1>News</h1>
+  <div id="newsList">読み込み中…</div>
+</main>
 
-  <!-- ===== news取得JS ===== -->
-  <script>
-    const SERVICE_ID = "yarahazi";
-    const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
-    const ENDPOINT = "news";
+<!-- =========================
+     Theme Toggle
+========================= -->
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <span class="theme-icon" id="theme-icon">◐</span>
+</button>
 
-    fetch(`https://${SERVICE_ID}.microcms.io/api/v1/${ENDPOINT}`, {
-      headers: {
-        "X-MICROCMS-API-KEY": API_KEY
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        const list = document.getElementById("newsList");
-        list.innerHTML = "";
+<!-- =========================
+     Footer
+========================= -->
+<div id="footer"></div>
 
-        data.contents.forEach(item => {
-          const article = document.createElement("article");
-          article.className = "news-item";
+<!-- =========================
+     Scripts（※ 絶対パス）
+========================= -->
+<script src="/js/header.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/common.js"></script>
 
-          article.innerHTML = `
-            <div class="news-date">${item.publishedAt?.slice(0,10)}</div>
-            <h2 class="news-title">${item.title}</h2>
-            <div class="news-body">${item.body}</div>
-          `;
+<script>
+  const SERVICE_ID = "yarahazi";
+  const API_KEY = "ここにAPIキー";
+  const ENDPOINT = "news";
 
-          list.appendChild(article);
-        });
-      })
-      .catch(err => {
-        document.getElementById("newsList").textContent = "Newsの取得に失敗しました";
-        console.error(err);
+  fetch(`https://${SERVICE_ID}.microcms.io/api/v1/${ENDPOINT}`, {
+    headers: {
+      "X-MICROCMS-API-KEY": API_KEY
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById("newsList");
+      list.innerHTML = "";
+
+      data.contents.forEach(item => {
+        const date = new Date(item.publishedAt).toLocaleDateString("ja-JP");
+
+        const article = document.createElement("article");
+        article.className = "news-item";
+
+        article.innerHTML = `
+          <div class="news-date">${date}</div>
+          <h2 class="news-title">${item.title}</h2>
+          <div class="news-body">${item.body?.html ?? ""}</div>
+        `;
+
+        list.appendChild(article);
       });
-  </script>
+    })
+    .catch(() => {
+      document.getElementById("newsList").textContent =
+        "Newsの取得に失敗しました";
+    });
+</script>
 
 </body>
 </html>
