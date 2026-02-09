@@ -24,6 +24,7 @@
 
     .news-item {
       width: 100%;
+      max-width: 100%;
       padding: 18px 20px;
       border: 1px solid var(--line, rgba(0,0,0,0.1));
       border-radius: 16px;
@@ -91,6 +92,33 @@
 <script src="js/theme.js"></script>
 <script src="/common.js"></script>
 <script src="js/news.js"></script>
+
+<script>
+  // news.js のサンプル表示処理
+  const newsList = document.getElementById("news-list");
+
+  // ダミーデータ
+  const newsItems = [
+    { date: "2026-02-09", category: "Update", title: "サイトリニューアル完了", excerpt: "Newsカードの縦並びや日付処理などを改善しました。" },
+    { date: "2026-02-08", category: "Info", title: "サーバー移行のお知らせ", excerpt: "GitHub Pages に完全移行しました。" },
+    { date: "2026-02-07", category: "Update", title: "テーマ切替機能追加", excerpt: "ライト・ダークテーマをワンクリックで切替可能にしました。" }
+  ];
+
+  newsItems.forEach(item => {
+    const date = item.date ? item.date.replace(/-/g, ".") : "";
+    const html = `
+      <div class="news-item">
+        <div class="news-meta">
+          <span>${date}</span>
+          <span>${item.category}</span>
+        </div>
+        <div class="news-title">${item.title}</div>
+        <div class="news-excerpt">${item.excerpt}</div>
+      </div>
+    `;
+    newsList.insertAdjacentHTML("beforeend", html);
+  });
+</script>
 
 </body>
 </html>
