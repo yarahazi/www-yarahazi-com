@@ -16,18 +16,26 @@
       box-sizing: border-box;
     }
 
-    .news-detail-page h1 {
+    .news-detail-title {
+      font-size: 1.8rem;
       margin-bottom: 10px;
+      line-height: 1.4;
     }
 
     .news-meta {
-      color: var(--text-sub);
       font-size: 0.85rem;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
+      color: var(--sub, #777);
     }
 
     .news-body {
       line-height: 1.9;
+      font-size: 1rem;
+    }
+
+    .news-body img {
+      max-width: 100%;
+      border-radius: 12px;
     }
   </style>
 </head>
@@ -38,7 +46,7 @@
 <div id="header"></div>
 
 <main class="news-detail-page">
-  <h1 id="title"></h1>
+  <h1 class="news-detail-title" id="title"></h1>
   <div class="news-meta" id="meta"></div>
   <div class="news-body" id="body">読み込み中…</div>
 </main>
@@ -50,35 +58,59 @@
 <!-- 共通フッター -->
 <div id="footer"></div>
 
-<!-- 共通JS -->
 <script src="common.js"></script>
 <script src="js/header.js"></script>
 <script src="js/theme.js"></script>
 
 <script>
 const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
+const SERVICE_URL = "https://yarahazi.microcms.io/api/v1/news/";
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
+
+/* 日付フォーマット関数 */
+function formatDate(dateStr) {
+  if (!dateStr) return "";
+
+  // ISO形式対応
+  if (dateStr.includes("T")) {
+    return dateStr.split("T")[0].replace(/-/g, ".");
+  }
+
+  // YYYY-MM-DD形式
+  return dateStr.replace(/-/g, ".");
+}
 
 if (!id) {
   document.getElementById("body").innerHTML = "記事が見つかりません";
 } else {
-  fetch(`https://yarahazi.microcms.io/api/v1/news/${id}`, {
+
+  fetch(SERVICE_URL + id, {
     headers: { "X-MICROCMS-API-KEY": API_KEY }
   })
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("取得失敗");
+    return res.json();
+  })
   .then(item => {
-    const date = item.date
-      ? item.date.replace(/-/g, ".")
-      : "";
 
+    const date = formatDate(item.date || item.publishedAt);
+
+    // タイトル反映
     document.getElementById("title").textContent = item.title;
+    document.title = item.title + " | やらはじ公式サイト";
+
+    // メタ情報
     document.getElementById("meta").textContent =
       `${date}${item.category ? " / " + item.category : ""}`;
+
+    // 本文
     document.getElementById("body").innerHTML = item.body;
+
   })
   .catch(() => {
-    document.getElementById("body").innerHTML = "記事の取得に失敗しました";
+    document.getElementById("body").innerHTML =
+      "記事の取得に失敗しました";
   });
 }
 </script>
