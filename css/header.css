@@ -26,6 +26,12 @@ html[data-theme="dark"] .site-header {
 .site-logo {
   font-weight: 600;
   letter-spacing: 0.08em;
+  text-decoration: note;
+  color: var(--text-main);
+}
+
+.site-logo:hover {
+  opacity: 0.7;
 }
 
 .site-nav {
