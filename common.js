@@ -7,6 +7,7 @@ fetch("header.html")
     const header = document.getElementById("header");
     if (header) {
       header.innerHTML = html;
+      initHeader();   // ← ここが超重要
     }
   });
 
