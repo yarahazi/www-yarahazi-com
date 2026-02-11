@@ -21,7 +21,7 @@
     }
 
     .news-meta {
-      color: var(--sub, #777);
+      color: var(--text-sub);
       font-size: 0.85rem;
       margin-bottom: 24px;
     }
@@ -34,7 +34,8 @@
 
 <body>
 
-<header class="site-header" id="site-header"></header>
+<!-- 共通ヘッダー -->
+<div id="header"></div>
 
 <main class="news-detail-page">
   <h1 id="title"></h1>
@@ -46,34 +47,40 @@
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
+<!-- 共通フッター -->
 <div id="footer"></div>
 
+<!-- 共通JS -->
+<script src="common.js"></script>
 <script src="js/header.js"></script>
 <script src="js/theme.js"></script>
-<script src="common.js"></script>
 
 <script>
 const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
 
-fetch(`https://yarahazi.microcms.io/api/v1/news/${id}`, {
-  headers: { "X-MICROCMS-API-KEY": API_KEY }
-})
-.then(res => res.json())
-.then(item => {
-  const date = item.date
-    ? item.date.replace(/-/g, ".")
-    : "";
+if (!id) {
+  document.getElementById("body").innerHTML = "記事が見つかりません";
+} else {
+  fetch(`https://yarahazi.microcms.io/api/v1/news/${id}`, {
+    headers: { "X-MICROCMS-API-KEY": API_KEY }
+  })
+  .then(res => res.json())
+  .then(item => {
+    const date = item.date
+      ? item.date.replace(/-/g, ".")
+      : "";
 
-  document.getElementById("title").textContent = item.title;
-  document.getElementById("meta").textContent =
-    `${date} / ${item.category || ""}`;
-  document.getElementById("body").innerHTML = item.body;
-})
-.catch(() => {
-  document.getElementById("body").innerHTML = "記事の取得に失敗しました";
-});
+    document.getElementById("title").textContent = item.title;
+    document.getElementById("meta").textContent =
+      `${date}${item.category ? " / " + item.category : ""}`;
+    document.getElementById("body").innerHTML = item.body;
+  })
+  .catch(() => {
+    document.getElementById("body").innerHTML = "記事の取得に失敗しました";
+  });
+}
 </script>
 
 </body>
