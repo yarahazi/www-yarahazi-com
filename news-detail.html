@@ -3,22 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News | やらはじ</title>
+  <title>News | やらはじ公式サイト</title>
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
 
   <style>
-    .container {
+    .news-detail-page {
       max-width: 800px;
-      margin: 100px auto 80px;
+      margin: 120px auto 80px;
       padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .news-detail-page h1 {
+      margin-bottom: 10px;
     }
 
     .news-meta {
       color: var(--sub, #777);
       font-size: 0.85rem;
-      margin-bottom: 10px;
+      margin-bottom: 24px;
     }
 
     .news-body {
@@ -31,10 +36,10 @@
 
 <header class="site-header" id="site-header"></header>
 
-<main class="container">
+<main class="news-detail-page">
   <h1 id="title"></h1>
   <div class="news-meta" id="meta"></div>
-  <div class="news-body" id="body"></div>
+  <div class="news-body" id="body">読み込み中…</div>
 </main>
 
 <button class="theme-toggle" id="theme-toggle">
@@ -45,8 +50,31 @@
 
 <script src="js/header.js"></script>
 <script src="js/theme.js"></script>
-<script src="/common.js"></script>
-<script src="js/news-detail.js"></script>
+<script src="common.js"></script>
+
+<script>
+const API_KEY = "ここにAPIキー";
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+fetch(`https://yarahazi.microcms.io/api/v1/news/${id}`, {
+  headers: { "X-MICROCMS-API-KEY": API_KEY }
+})
+.then(res => res.json())
+.then(item => {
+  const date = item.date
+    ? item.date.replace(/-/g, ".")
+    : "";
+
+  document.getElementById("title").textContent = item.title;
+  document.getElementById("meta").textContent =
+    `${date} / ${item.category || ""}`;
+  document.getElementById("body").innerHTML = item.body;
+})
+.catch(() => {
+  document.getElementById("body").innerHTML = "記事の取得に失敗しました";
+});
+</script>
 
 </body>
 </html>
