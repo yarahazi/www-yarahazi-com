@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initHeader() {
 
   /* =========
      Mobile menu
@@ -37,5 +37,4 @@ document.addEventListener("DOMContentLoaded", () => {
       lastScroll = current;
     });
   }
-
-});
+}
