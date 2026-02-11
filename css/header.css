@@ -50,7 +50,7 @@ html[data-theme="dark"] .site-header {
 .site-logo {
   font-weight: 600;
   letter-spacing: 0.08em;
-  text-decoration: none;   /* ← 下線削除 */
+  text-decoration: none;
   color: var(--text-main);
 }
 
@@ -69,6 +69,7 @@ html[data-theme="dark"] .site-header {
 .site-nav {
   display: flex;
   gap: 20px;
+  z-index: 1000; /* 確実にmenu-toggleより下 */
 }
 
 .site-nav a {
@@ -94,6 +95,8 @@ html[data-theme="dark"] .site-header {
   border: none;
   cursor: pointer;
   color: var(--text-main);
+  position: relative; /* 追加 */
+  z-index: 1001;      /* navより上に表示 */
 }
 
 
