@@ -27,7 +27,7 @@ html[data-theme="dark"] .site-header {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-decoration: note;
-  color: var(--text-main);
+  color: inherit;
 }
 
 .site-logo:hover {
