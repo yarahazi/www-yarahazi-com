@@ -9,13 +9,33 @@
   <link rel="stylesheet" href="css/header.css">
 
   <style>
-    .news-detail-page {
+    /* ==========================
+       ページ全体の縦並び
+    ========================== */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* 最低でも画面高さ分 */
+    }
+
+    main {
+      flex: 1; /* mainが余白を埋める */
       max-width: 800px;
       margin: 120px auto 80px;
       padding: 0 20px;
       box-sizing: border-box;
+      width: 100%;
     }
 
+    /* ==========================
+       News詳細ページ用スタイル
+    ========================== */
     .news-detail-title {
       font-size: 1.8rem;
       margin-bottom: 10px;
@@ -36,6 +56,16 @@
     .news-body img {
       max-width: 100%;
       border-radius: 12px;
+    }
+
+    /* ==========================
+       Footerスタイル（任意）
+    ========================== */
+    #footer {
+      background-color: var(--bg);
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid var(--line, rgba(0,0,0,0.1));
     }
   </style>
 </head>
