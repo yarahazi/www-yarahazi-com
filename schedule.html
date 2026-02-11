@@ -9,86 +9,42 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
 
-  <!-- =========================
-       Schedule 専用デザイン
-       （index用レイアウト上書き込み）
-  ========================= -->
   <style>
-    /* index用 container を無効化 */
-    .container.schedule-page {
-      display: block;
-      height: auto;
+    .schedule-page {
       max-width: 1000px;
-      margin: 100px auto 80px;
+      margin: 120px auto 80px;
       padding: 0 20px;
       box-sizing: border-box;
     }
 
     .schedule-page h1 {
       font-size: 2rem;
-      margin-bottom: 0.3em;
+      margin-bottom: 20px;
     }
 
-    .note {
-      color: var(--sub, #666);
+    .schedule-note {
       font-size: 0.9rem;
-      margin-bottom: 1.5em;
-    }
-
-    /* ===== 固定スケジュール ===== */
-    .fixed-schedule {
-      border: 1px solid var(--line, rgba(0,0,0,0.1));
-      border-radius: 14px;
-      padding: 16px 18px;
+      color: var(--text-sub);
       margin-bottom: 24px;
-      background: color-mix(in srgb, var(--bg, #fff) 92%, transparent);
+      line-height: 1.6;
     }
 
-    .fixed-item {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .fixed-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--accent, #cd74e6);
-      color: #fff;
-      white-space: nowrap;
-    }
-
-    .fixed-text {
-      font-size: 0.95rem;
-    }
-
-    /* ===== カレンダー ===== */
-    .calendar-wrap {
-      position: relative;
+    .calendar-wrapper {
       width: 100%;
-      padding-top: 75%;
-      border: 1px solid var(--line, rgba(0,0,0,0.1));
       border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
-    .calendar-wrap iframe {
-      position: absolute;
-      inset: 0;
+    .calendar-wrapper iframe {
       width: 100%;
-      height: 100%;
-      border: 0;
+      height: 600px;
+      border: none;
     }
 
-    @media (max-width: 640px) {
-      .calendar-wrap {
-        padding-top: 120%;
+    @media (max-width: 768px) {
+      .calendar-wrapper iframe {
+        height: 500px;
       }
     }
   </style>
@@ -96,77 +52,38 @@
 
 <body>
 
-<!-- =========================
-     Header（共通）
-========================= -->
-<header class="site-header" id="site-header">
-  <div class="header-inner">
-    <div class="site-logo">やらはじ</div>
+<!-- 共通ヘッダー -->
+<div id="header"></div>
 
-    <nav class="site-nav" id="site-nav">
-      <a href="about.html">About</a>
-      <a href="news.html">News</a>
-      <a href="schedule.html" aria-current="page">Schedule</a>
-      <a href="profile.html">Profile</a>
-      <a href="guideline.html">Guideline</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+<main class="schedule-page">
+  <h1>Schedule</h1>
 
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
-      ≡
-    </button>
+  <div class="schedule-note">
+    ・Live配信：不定期 16:45〜<br>
+    ・Shorts：毎週金曜日 18:45〜
   </div>
-</header>
 
-<!-- =========================
-     Main
-========================= -->
-<main class="container schedule-page">
-  <h1>スケジュール</h1>
-
-  <p class="note">
-    配信・投稿予定は下記の時間帯を基本に、カレンダーで更新しています
-  </p>
-
-  <!-- 固定スケジュール -->
-  <section class="fixed-schedule">
-    <div class="fixed-item">
-      <span class="badge">LIVE</span>
-      <span class="fixed-text">ライブ配信：不定期 16:45〜</span>
-    </div>
-    <div class="fixed-item">
-      <span class="badge">Shorts</span>
-      <span class="fixed-text">毎週金曜日 18:45〜</span>
-    </div>
-  </section>
-
-  <!-- Googleカレンダー -->
-  <div class="calendar-wrap">
+  <div class="calendar-wrapper">
     <iframe
-      src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a815d3fbf@group.calendar.google.com"
+      src="https://calendar.google.com/calendar/u/0/embed?color=%23cd74e6&src=9023ce9f73f72004d06ca537a6404d3f746e8c09a2504e43f4c1eb3a"
+      frameborder="0"
       scrolling="no">
     </iframe>
   </div>
 </main>
 
-<!-- =========================
-     Theme Toggle
-========================= -->
+<!-- テーマ切替ボタン -->
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
-<!-- =========================
-     Footer
-========================= -->
+<!-- 共通フッター -->
 <div id="footer"></div>
 
-<!-- =========================
-     Scripts
-========================= -->
+<!-- 共通JS -->
+<script src="common.js"></script>
 <script src="js/header.js"></script>
 <script src="js/theme.js"></script>
-<script src="/common.js"></script>
 
 </body>
 </html>
