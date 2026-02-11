@@ -1,15 +1,20 @@
-// header
-fetch("/header.html")
+/* =========
+   Header
+========= */
+fetch("header.html")
   .then(res => res.text())
   .then(html => {
-    const header= document.getElementById("header");
+    const header = document.getElementById("header");
     if (header) {
       header.innerHTML = html;
-    };
-    
-// footer
-fetch("/footer.html")
-  .then(response => response.text())
+    }
+  });
+
+/* =========
+   Footer
+========= */
+fetch("footer.html")
+  .then(res => res.text())
   .then(html => {
     const footer = document.getElementById("footer");
     if (footer) {
