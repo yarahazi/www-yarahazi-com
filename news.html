@@ -5,14 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>News | やらはじ公式サイト</title>
 
+  <!-- 共通CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
 
   <style>
-    .container.news-page {
+    /* ===== Newsページ専用 ===== */
+    .news-page {
       max-width: 900px;
-      margin: 100px auto 80px;
+      margin: 120px auto 80px;
       padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .news-page h1 {
+      font-size: 2rem;
+      margin-bottom: 32px;
     }
 
     .news-list {
@@ -24,18 +32,16 @@
 
     .news-item {
       width: 100%;
-      max-width: 100%;
-      padding: 18px 20px;
+      padding: 20px;
       border: 1px solid var(--line, rgba(0,0,0,0.1));
       border-radius: 16px;
       cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
+      transition: 0.2s;
       box-sizing: border-box;
     }
 
     .news-item:hover {
       background: color-mix(in srgb, var(--bg) 92%, transparent);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
 
     .news-meta {
@@ -62,9 +68,11 @@
 
 <body>
 
+<!-- ===== Header（共通） ===== -->
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <div class="site-logo">やらはじ</div>
+
     <nav class="site-nav" id="site-nav">
       <a href="about.html">About</a>
       <a href="news.html" aria-current="page">News</a>
@@ -73,51 +81,75 @@
       <a href="guideline.html">Guideline</a>
       <a href="contact.html">Contact</a>
     </nav>
+
     <button class="menu-toggle" id="menu-toggle">≡</button>
   </div>
 </header>
 
-<main class="container news-page">
+<!-- ===== Main ===== -->
+<main class="news-page">
   <h1>News</h1>
-  <div class="news-list" id="news-list"></div>
+  <div class="news-list" id="news-list">読み込み中…</div>
 </main>
 
+<!-- ===== Theme ===== -->
 <button class="theme-toggle" id="theme-toggle">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
+<!-- ===== Footer ===== -->
 <div id="footer"></div>
 
+<!-- ===== Scripts ===== -->
 <script src="js/header.js"></script>
 <script src="js/theme.js"></script>
-<script src="/common.js"></script>
-<script src="js/news.js"></script>
+<script src="common.js"></script>
 
 <script>
-  // news.js のサンプル表示処理
-  const newsList = document.getElementById("news-list");
+const API_KEY = "ここにAPIキー";
+const ENDPOINT = "https://yarahazi.microcms.io/api/v1/news?filters=publishedAt[exists]&orders=-date";
 
-  // ダミーデータ
-  const newsItems = [
-    { date: "2026-02-09", category: "Update", title: "サイトリニューアル完了", excerpt: "Newsカードの縦並びや日付処理などを改善しました。" },
-    { date: "2026-02-08", category: "Info", title: "サーバー移行のお知らせ", excerpt: "GitHub Pages に完全移行しました。" },
-    { date: "2026-02-07", category: "Update", title: "テーマ切替機能追加", excerpt: "ライト・ダークテーマをワンクリックで切替可能にしました。" }
-  ];
+fetch(ENDPOINT, {
+  headers: { "X-MICROCMS-API-KEY": API_KEY }
+})
+.then(res => res.json())
+.then(data => {
+  const list = document.getElementById("news-list");
+  list.innerHTML = "";
 
-  newsItems.forEach(item => {
-    const date = item.date ? item.date.replace(/-/g, ".") : "";
-    const html = `
-      <div class="news-item">
-        <div class="news-meta">
-          <span>${date}</span>
-          <span>${item.category}</span>
-        </div>
-        <div class="news-title">${item.title}</div>
-        <div class="news-excerpt">${item.excerpt}</div>
+  if (!data.contents || data.contents.length === 0) {
+    list.innerHTML = "記事がありません";
+    return;
+  }
+
+  data.contents.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "news-item";
+    div.onclick = () => {
+      location.href = `news-detail.html?id=${item.id}`;
+    };
+
+    const date = item.date
+      ? item.date.replace(/-/g, ".")
+      : "";
+
+    div.innerHTML = `
+      <div class="news-meta">
+        <span>${date}</span>
+        <span>${item.category || ""}</span>
+      </div>
+      <div class="news-title">${item.title}</div>
+      <div class="news-excerpt">
+        ${item.body ? item.body.replace(/<[^>]*>?/gm, "").slice(0, 60) : ""}…
       </div>
     `;
-    newsList.insertAdjacentHTML("beforeend", html);
+
+    list.appendChild(div);
   });
+})
+.catch(() => {
+  document.getElementById("news-list").innerHTML = "記事の取得に失敗しました";
+});
 </script>
 
 </body>
