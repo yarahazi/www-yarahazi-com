@@ -10,13 +10,33 @@
   <link rel="stylesheet" href="css/header.css">
 
   <style>
-    .news-page {
+    /* ==========================
+       ページ全体の縦並び
+    ========================== */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* 最低でも画面高さ分 */
+    }
+
+    main {
+      flex: 1; /* mainが余白を埋める */
       max-width: 900px;
       margin: 120px auto 80px;
       padding: 0 20px;
       box-sizing: border-box;
+      width: 100%;
     }
 
+    /* ==========================
+       Newsページ用スタイル
+    ========================== */
     .news-page h1 {
       font-size: 2rem;
       margin-bottom: 32px;
@@ -62,6 +82,17 @@
       color: var(--text-sub);
       line-height: 1.6;
     }
+
+    /* ==========================
+       Footerスタイル（任意）
+    ========================== */
+    #footer {
+      background-color: var(--bg);
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid var(--line, rgba(0,0,0,0.1));
+    }
+
   </style>
 </head>
 
