@@ -48,7 +48,7 @@
       gap: 12px;
       font-size: 0.8rem;
       margin-bottom: 6px;
-      color: var(--sub, #777);
+      color: var(--text-sub);
     }
 
     .news-title {
@@ -59,7 +59,7 @@
 
     .news-excerpt {
       font-size: 0.9rem;
-      color: var(--sub, #777);
+      color: var(--text-sub);
       line-height: 1.6;
     }
   </style>
@@ -67,37 +67,36 @@
 
 <body>
 
-<header class="site-header" id="site-header">
-  <div class="header-inner">
-    <div class="site-logo">やらはじ</div>
+<!-- =========================
+     Header（共通読み込み）
+========================= -->
+<div id="header"></div>
 
-    <nav class="site-nav" id="site-nav">
-      <a href="about.html">About</a>
-      <a href="news.html" aria-current="page">News</a>
-      <a href="schedule.html">Schedule</a>
-      <a href="profile.html">Profile</a>
-      <a href="guideline.html">Guideline</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-
-    <button class="menu-toggle" id="menu-toggle">≡</button>
-  </div>
-</header>
-
+<!-- =========================
+     Main
+========================= -->
 <main class="news-page">
   <h1>News</h1>
   <div class="news-list" id="news-list">読み込み中…</div>
 </main>
 
-<button class="theme-toggle" id="theme-toggle">
+<!-- =========================
+     Theme Toggle
+========================= -->
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
+<!-- =========================
+     Footer（共通読み込み）
+========================= -->
 <div id="footer"></div>
 
-<script src="js/header.js"></script>
+<!-- =========================
+     Scripts
+========================= -->
 <script src="js/theme.js"></script>
-<script src="common.js"></script>
+<script src="/common.js"></script>
 
 <script>
 const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
@@ -108,7 +107,6 @@ function formatDate(dateString) {
   if (!dateString) return "";
 
   const date = new Date(dateString);
-
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
@@ -136,7 +134,6 @@ fetch(ENDPOINT, {
       location.href = `news-detail.html?id=${item.id}`;
     };
 
-    // 🔹 dateフィールド優先 → なければ publishedAt
     const formattedDate = formatDate(item.date || item.publishedAt);
 
     div.innerHTML = `
