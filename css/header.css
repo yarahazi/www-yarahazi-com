@@ -1,83 +1,129 @@
 /* =========================
    Header Base
 ========================= */
+
 .site-header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  background: var(--bg);
+  height: 64px;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0,0,0,0.08);
-  z-index: 1000;
-  transition: transform 0.3s ease, padding 0.3s ease;
+  transition: transform 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+  z-index: 900;
 }
+
+html[data-theme="dark"] .site-header {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.site-header.hide {
+  transform: translateY(-100%);
+}
+
+.site-header.shrink {
+  height: 48px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+/* =========================
+   Inner Layout
+========================= */
 
 .header-inner {
   max-width: 1100px;
+  height: 100%;
   margin: 0 auto;
-  padding: 18px 20px;
+  padding: 0 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
+
 /* =========================
-   Logo（← 下線を消す修正）
+   Logo
 ========================= */
+
 .site-logo {
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-decoration: none; /* ← これで下線が消える */
-  color: inherit;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;   /* ← 下線削除 */
+  color: var(--text-main);
 }
 
+.site-logo:visited,
+.site-logo:hover,
+.site-logo:active {
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+
 /* =========================
-   Navigation
+   Navigation (PC)
 ========================= */
+
 .site-nav {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .site-nav a {
+  font-size: 13px;
   text-decoration: none;
-  color: inherit;
-  font-size: 0.95rem;
-  transition: opacity 0.2s ease;
+  color: var(--text-sub);
+  transition: color 0.2s ease;
 }
 
 .site-nav a:hover {
-  opacity: 0.6;
+  color: var(--text-main);
 }
 
+
 /* =========================
-   Mobile Menu Button
+   Hamburger Button
 ========================= */
+
 .menu-toggle {
   display: none;
+  font-size: 26px;
   background: none;
   border: none;
-  font-size: 1.4rem;
   cursor: pointer;
+  color: var(--text-main);
 }
+
 
 /* =========================
    Mobile
 ========================= */
+
 @media (max-width: 768px) {
+
   .site-nav {
     position: fixed;
-    top: 60px;
-    right: -100%;
-    flex-direction: column;
-    background: var(--bg);
+    top: 64px;
+    right: 0;
     width: 220px;
-    padding: 20px;
-    transition: right 0.3s ease;
+    height: calc(100vh - 64px);
+    background: var(--bg);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.08);
+  }
+
+  html[data-theme="dark"] .site-nav {
+    box-shadow: -4px 0 12px rgba(0,0,0,0.4);
   }
 
   .site-nav.open {
-    right: 0;
+    transform: translateX(0);
   }
 
   .menu-toggle {
