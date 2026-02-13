@@ -5,14 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>News | やらはじ公式サイト</title>
 
-  <!-- 共通CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
 
   <style>
-    /* ==========================
-       ページ全体の縦並び
-    ========================== */
     html, body {
       height: 100%;
       margin: 0;
@@ -22,11 +18,11 @@
     body {
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* 最低でも画面高さ分 */
+      min-height: 100vh;
     }
 
     main {
-      flex: 1; /* mainが余白を埋める */
+      flex: 1;
       max-width: 900px;
       margin: 120px auto 80px;
       padding: 0 20px;
@@ -34,9 +30,6 @@
       width: 100%;
     }
 
-    /* ==========================
-       Newsページ用スタイル
-    ========================== */
     .news-page h1 {
       font-size: 2rem;
       margin-bottom: 32px;
@@ -82,50 +75,26 @@
       color: var(--text-sub);
       line-height: 1.6;
     }
-
-    /* ==========================
-       Footerスタイル（任意）
-    ========================== */
-    #footer {
-      background-color: var(--bg);
-      padding: 20px;
-      text-align: center;
-      border-top: 1px solid var(--line, rgba(0,0,0,0.1));
-    }
-
   </style>
 </head>
 
 <body>
 
-<!-- =========================
-     Header（共通読み込み）
-========================= -->
 <div id="header"></div>
 
-<!-- =========================
-     Main
-========================= -->
 <main class="news-page">
   <h1>News</h1>
   <div class="news-list" id="news-list">読み込み中…</div>
 </main>
 
-<!-- =========================
-     Theme Toggle
-========================= -->
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
-<!-- =========================
-     Footer（共通読み込み）
-========================= -->
 <div id="footer"></div>
 
-<!-- =========================
-     Scripts
-========================= -->
+<!-- 🔥 ここが超重要（順番も） -->
+<script src="js/header.js"></script>
 <script src="js/theme.js"></script>
 <script src="/common.js"></script>
 
@@ -133,15 +102,12 @@
 const API_KEY = "AdcI8a9AAzyT78lwCGW1IusX5cEt23fy53m9";
 const ENDPOINT = "https://yarahazi.microcms.io/api/v1/news?filters=publishedAt[exists]&orders=-date";
 
-/* ===== 日付整形（YYYY.MM.DD） ===== */
 function formatDate(dateString) {
   if (!dateString) return "";
-
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-
   return `${year}.${month}.${day}`;
 }
 
