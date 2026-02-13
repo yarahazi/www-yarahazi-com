@@ -1,8 +1,6 @@
 function initHeader() {
 
-  /* =========
-     Mobile menu
-  ========= */
+  /* ========= Mobile menu ========= */
   const toggle = document.getElementById("menu-toggle");
   const nav = document.getElementById("site-nav");
 
@@ -13,9 +11,7 @@ function initHeader() {
     });
   }
 
-  /* =========
-     Header scroll control
-  ========= */
+  /* ========= Header scroll control ========= */
   const header = document.getElementById("site-header");
   let lastScroll = 0;
 
