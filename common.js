@@ -1,24 +1,33 @@
-/* =========
-   Header
-========= */
-fetch("header.html")
+// ===============================
+// Header Load
+// ===============================
+
+fetch("/header.html")
   .then(res => res.text())
   .then(html => {
-    const header = document.getElementById("header");
-    if (header) {
-      header.innerHTML = html;
-      initHeader();   // ← ここが超重要
+    const headerContainer = document.getElementById("header");
+
+    if (headerContainer) {
+      headerContainer.innerHTML = html;
+
+      // ★ 読み込み後に初期化
+      if (typeof initHeader === "function") {
+        initHeader();
+      }
     }
   });
 
-/* =========
-   Footer
-========= */
-fetch("footer.html")
+
+// ===============================
+// Footer Load
+// ===============================
+
+fetch("/footer.html")
   .then(res => res.text())
   .then(html => {
-    const footer = document.getElementById("footer");
-    if (footer) {
-      footer.innerHTML = html;
+    const footerContainer = document.getElementById("footer");
+
+    if (footerContainer) {
+      footerContainer.innerHTML = html;
     }
   });
