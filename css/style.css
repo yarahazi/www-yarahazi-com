@@ -41,13 +41,14 @@ body {
    Hero Carousel
 ========================= */
 
-.carousel{
-    position:relative;
-    width:100%;
-    aspect-ratio:16/10;
-    max-height:720px;
-    margin:0 auto;
-    overflow:hidden;
+.carousel {
+    position: relative;
+    width: min(1400px, calc(100% - 80px));
+    aspect-ratio: 16 / 10;
+    max-height: 720px;
+    margin: 32px auto;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .carousel-track {
