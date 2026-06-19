@@ -44,8 +44,8 @@ body {
 .carousel {
   position: relative;
   width: 100%;
-  height: calc(100vh - 64px);
-  min-height: 500px;
+  aspect-ratio: 16 / 10;
+  max-height: 750px;
   overflow: hidden;
 }
 
@@ -140,9 +140,9 @@ body {
 @media (max-width: 768px) {
 
   .carousel {
-    height: calc(100vh - 64px);
-    min-height: auto;
-  }
+  aspect-ratio: 9 / 16;
+  max-height: none;
+}
 
   .carousel-btn {
     width: 42px;
