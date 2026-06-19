@@ -301,3 +301,72 @@ body {
 }
 
 }
+
+/* =========================
+   About
+========================= */
+
+.about-section{
+    padding:80px 20px;
+}
+
+.about-inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 420px;
+    gap:80px;
+    align-items:center;
+}
+
+.about-text h2{
+    font-size:2rem;
+    margin-bottom:40px;
+}
+
+.profile-list{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    row-gap:22px;
+}
+
+.profile-list dt{
+    color:var(--text-sub);
+    font-weight:600;
+}
+
+.profile-list dd{
+    margin:0;
+    line-height:1.8;
+}
+
+.about-image{
+    text-align:center;
+}
+
+.about-image img{
+    width:100%;
+    max-width:380px;
+    height:auto;
+}
+
+@media (max-width:768px){
+
+.about-inner{
+    grid-template-columns:1fr;
+    gap:40px;
+}
+
+.about-image{
+    order:-1;
+}
+
+.about-image img{
+    max-width:280px;
+}
+
+.profile-list{
+    grid-template-columns:90px 1fr;
+}
+
+}
