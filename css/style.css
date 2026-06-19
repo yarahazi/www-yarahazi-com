@@ -316,7 +316,7 @@ body {
     display:grid;
     grid-template-columns:1fr 420px;
     gap:80px;
-    align-items:start;
+    align-items:center;
 }
 
 .about-text h2{
