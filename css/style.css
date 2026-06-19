@@ -41,13 +41,13 @@ body {
    Hero Carousel
 ========================= */
 
-.carousel {
-  position: relative;
-  width: 100%;
-  height: calc(100vh - 64px - 60px);
-  min-height: 450px;
-  max-height: 750px;
-  overflow: hidden;
+.carousel{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/10;
+    max-height:720px;
+    margin:0 auto;
+    overflow:hidden;
 }
 
 .carousel-track {
@@ -138,11 +138,13 @@ body {
    Smartphone
 ========================= */
 
-@media (max-width: 768px) {
+@media(max-width:768px){
 
-  .carousel {
-  aspect-ratio: 9 / 16;
-  max-height: none;
+.carousel{
+    aspect-ratio:9/16;
+    max-height:none;
+}
+
 }
 
   .carousel-btn {
