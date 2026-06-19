@@ -29,14 +29,12 @@ if (list) {
 
         const [y, m, d] = item.date.split("-");
 
-        div.innerHTML = `
-          <div class="news-meta">
-            <span>${y}.${Number(m)}.${Number(d)}</span>
-            <span>${item.category}</span>
-          </div>
-          <div class="news-title">${item.title}</div>
-          <div class="news-excerpt">${item.body.slice(0, 60)}…</div>
-        `;
+div.innerHTML = `
+  <div class="news-date">${y}.${Number(m)}.${Number(d)}</div>
+  <div class="news-category">${item.category}</div>
+  <div class="news-title">${item.title}</div>
+  <div class="news-arrow">›</div>
+`;
 
         list.appendChild(div);
       });
