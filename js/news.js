@@ -29,10 +29,8 @@ if (list) {
 
         const date = new Date(item.date || item.publishedAt);
 
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, "0");
-        const d = String(date.getDate()).padStart(2, "0");
-
+        const [y, m, d] = item.date.split("T")[0].split("-");
+        
 div.innerHTML = `
   <div class="news-date">${y}.${m}.${d}</div>
   <div class="news-category">${item.category || ""}</div>
