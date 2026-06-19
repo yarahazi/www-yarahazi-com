@@ -15,9 +15,37 @@
 <div id="header"></div>
 
 <!-- Main -->
-<main class="container">
-  <div class="main-text">やらはじ</div>
-</main>
+<!-- Hero Carousel -->
+<section class="carousel">
+  <div class="carousel-track" id="carousel-track">
+
+    <!-- スライド1 -->
+    <div class="slide">
+      <picture>
+        <source media="(max-width: 768px)" srcset="image/index/carousel/newsite_sp.png">
+        <img src="image/index/carousel/newsite_pc.png" alt="やらはじ公式サイト">
+      </picture>
+    </div>
+
+    <!-- スライド2（YouTube） -->
+    <div class="slide">
+      <a href="http://www.youtube.com/@yarahazi_nnp" target="_blank" rel="noopener noreferrer">
+        <picture>
+          <source media="(max-width: 768px)" srcset="image/index/carousel/youtube_sp.png">
+          <img src="image/index/carousel/youtube_pc.png" alt="やらはじ YouTube">
+        </picture>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- 矢印 -->
+  <button class="carousel-btn prev" id="prev" aria-label="前へ">&#10094;</button>
+  <button class="carousel-btn next" id="next" aria-label="次へ">&#10095;</button>
+
+  <!-- ドット -->
+  <div class="carousel-dots" id="carousel-dots"></div>
+</section>
 
 <!-- Footer -->
 <div id="footer"></div>
