@@ -27,15 +27,19 @@ if (list) {
           location.href = `news-detail.html?id=${item.id}`;
         };
 
-        const [y, m, d] = item.date.split("-");
+        const date = new Date(item.date || item.publishedAt);
+
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, "0");
+        const d = String(date.getDate()).padStart(2, "0");
 
 div.innerHTML = `
-  <div class="news-date">${y}.${Number(m)}.${Number(d)}</div>
-  <div class="news-category">${item.category}</div>
+  <div class="news-date">${y}.${m}.${d}</div>
+  <div class="news-category">${item.category || ""}</div>
   <div class="news-title">${item.title}</div>
   <div class="news-arrow">›</div>
 `;
-
+        
         list.appendChild(div);
       });
 
