@@ -623,10 +623,7 @@ html[data-theme="dark"] .timeline-content {
 
 }
 
-/* =========================
-   SNS
-========================= */
-
+/* SNS */
 .sns-section {
   padding: 80px 20px;
 }
@@ -637,50 +634,75 @@ html[data-theme="dark"] .timeline-content {
 }
 
 .sns-inner h2 {
+  margin: 0 0 40px;
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 40px;
 }
 
 .sns-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
-.sns-grid a {
+.sns-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 70px;
+
+  min-height: 72px;
   padding: 20px;
-  border: 1px solid rgba(0, 0, 0, .08);
+
   border-radius: 12px;
-  color: var(--text-main);
+
+  color: #fff;
   text-decoration: none;
-  background: rgba(67, 106, 168, .05);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.sns-grid a:hover {
-  opacity: 0.7;
-  transform: translateY(-2px);
+.sns-button:hover {
+  opacity: 0.9;
+  transform: translateY(-3px);
 }
 
-html[data-theme="dark"] .sns-grid a {
-  border-color: rgba(255, 255, 255, .08);
-  background: rgba(255, 255, 255, .04);
+/* YouTube */
+.sns-youtube {
+  background: #ff0000;
 }
 
-/* =========================
-   SNS - Smartphone
-========================= */
+/* X */
+.sns-x {
+  background: #000;
+}
 
+/* Instagram */
+.sns-instagram {
+  background: linear-gradient(
+    135deg,
+    #833ab4 0%,
+    #c13584 35%,
+    #fd1d1d 65%,
+    #fcb045 100%
+  );
+}
+
+/* Smartphone */
 @media (max-width: 768px) {
 
   .sns-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .sns-button {
+    min-height: 64px;
   }
 
 }
