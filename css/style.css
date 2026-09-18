@@ -622,3 +622,65 @@ html[data-theme="dark"] .timeline-content {
   }
 
 }
+
+/* =========================
+   SNS
+========================= */
+
+.sns-section {
+  padding: 80px 20px;
+}
+
+.sns-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sns-inner h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.sns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sns-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 12px;
+  color: var(--text-main);
+  text-decoration: none;
+  background: rgba(67, 106, 168, .05);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sns-grid a:hover {
+  opacity: 0.7;
+  transform: translateY(-2px);
+}
+
+html[data-theme="dark"] .sns-grid a {
+  border-color: rgba(255, 255, 255, .08);
+  background: rgba(255, 255, 255, .04);
+}
+
+/* =========================
+   SNS - Smartphone
+========================= */
+
+@media (max-width: 768px) {
+
+  .sns-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+}
