@@ -706,3 +706,122 @@ html[data-theme="dark"] .timeline-content {
   }
 
 }
+
+/* =========================
+Guideline
+========================= */
+
+.guideline-page {
+width: 100%;
+}
+
+.guideline-section {
+padding: 80px 20px 100px;
+}
+
+.guideline-inner {
+max-width: 900px;
+margin: 0 auto;
+}
+
+.guideline-inner > h1 {
+margin: 0 0 20px;
+text-align: center;
+font-size: 2.2rem;
+letter-spacing: 0.08em;
+}
+
+.guideline-lead {
+margin: 0 auto 60px;
+text-align: center;
+line-height: 1.9;
+}
+
+/* 各項目 */
+
+.guideline-block {
+margin-bottom: 48px;
+}
+
+.guideline-block h2 {
+margin: 0 0 20px;
+padding-left: 14px;
+border-left: 4px solid #436aa8;
+font-size: 1.35rem;
+}
+
+.guideline-block p {
+margin: 0 0 18px;
+line-height: 1.9;
+}
+
+.guideline-block ul {
+margin: 0;
+padding-left: 1.5em;
+}
+
+.guideline-block li {
+margin-bottom: 10px;
+line-height: 1.8;
+}
+
+/* お願い */
+
+.guideline-note {
+padding: 28px 30px;
+border-radius: 10px;
+background: rgba(67, 106, 168, 0.08);
+}
+
+.guideline-note h2 {
+margin-top: 0;
+}
+
+/* 更新について */
+
+.guideline-update {
+margin: 50px 0 0;
+text-align: center;
+font-size: 0.85rem;
+opacity: 0.7;
+}
+
+/* Dark mode */
+
+[data-theme=“dark”] .guideline-note {
+background: rgba(67, 106, 168, 0.15);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+.guideline-section {
+padding: 55px 18px 70px;
+}
+
+.guideline-inner > h1 {
+font-size: 1.8rem;
+}
+
+.guideline-lead {
+margin-bottom: 45px;
+font-size: 0.95rem;
+}
+
+.guideline-block {
+margin-bottom: 40px;
+}
+
+.guideline-block h2 {
+font-size: 1.15rem;
+}
+
+.guideline-block li {
+font-size: 0.95rem;
+}
+
+.guideline-note {
+padding: 22px 20px;
+}
+}
