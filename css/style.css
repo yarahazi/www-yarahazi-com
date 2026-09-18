@@ -825,3 +825,47 @@ font-size: 0.95rem;
 padding: 22px 20px;
 }
 }
+
+/* Privacy Policy / Common Page */
+.page-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px 100px;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.page-header h1 {
+  margin-bottom: 8px;
+}
+.page-header p {
+  opacity: 0.6;
+}
+.content-section {
+  line-height: 1.9;
+}
+.content-section h2 {
+  margin-top: 45px;
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+}
+.content-section p {
+  margin: 0 0 20px;
+}
+.content-section ul {
+  padding-left: 1.5em;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .page-content {
+    padding: 40px 18px 70px;
+  }
+  .page-header {
+    margin-bottom: 35px;
+  }
+  .content-section h2 {
+    margin-top: 35px;
+    font-size: 1.15rem;
+  }
+}
