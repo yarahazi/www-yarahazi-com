@@ -1,5 +1,50 @@
 <footer class="site-footer">
   <div class="footer-inner">
-    <p>当サイトに掲載されている記事、画像等の全てのコンテンツの無断転載を禁じます。© yarahazi</p>
+    <!-- ページリンク -->
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <a href="/">ホーム</a>
+      <a href="/about.html">やらはじについて</a>
+      <a href="/privacy.html">プライバシーポリシー</a>
+    </nav>
+    <!-- コピーライト -->
+    <p class="footer-copy">
+      当サイトに掲載されている記事、画像等の全てのコンテンツの無断転載を禁じます。© yarahazi
+    </p>
   </div>
 </footer>
+<style>
+  .site-footer {
+    padding: 32px 20px 24px;
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 0.85rem;
+  }
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-nav a {
+    color: var(--text-sub);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-nav a:hover {
+    color: var(--accent);
+  }
+  .footer-copy {
+    margin: 0;
+    line-height: 1.7;
+  }
+  @media (max-width: 600px) {
+    .footer-nav {
+      gap: 16px;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+    }
+  }
+</style>
